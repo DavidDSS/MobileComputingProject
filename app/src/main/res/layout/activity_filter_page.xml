@@ -26,32 +26,11 @@
             android:textSize="35dp"/>
     </androidx.appcompat.widget.Toolbar>
 
-    <EditText
+    <TextView
+        android:id="@+id/filterText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/ingredientEditText"
-        android:layout_below="@id/nutri_toolbar"/>
-
-    <Button
-        android:id="@+id/nextStepBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ingredientEditText"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:layout_marginBottom="32dp"
-        android:background="@color/nutri_green"
-        android:text="Next Step"
-        android:textColor="@color/white" />
-    <ListView
-        android:id="@+id/ingredientList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/nextStepBtn"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp" />
-
-
-
-
+        android:layout_below="@id/nutri_toolbar"
+        android:text=""
+        android:gravity="center"/>
 </RelativeLayout>

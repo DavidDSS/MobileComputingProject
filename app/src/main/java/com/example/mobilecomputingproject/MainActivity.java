@@ -1,6 +1,8 @@
 package com.example.mobilecomputingproject;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -26,6 +28,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    public String mainMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +63,18 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(List<RecipeModel> recipeList) {
                         ArrayAdapter arrayAdapter= new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, recipeList);
                         ingredientListView.setAdapter(arrayAdapter);
+
+                        //Got to Filters Page
+                        goToFilters(view);
                     }
                 });
             }
         });
+    }
+
+    public void goToFilters(View view) {
+        Intent intent = new Intent(MainActivity.this, FilterPageActivity.class);
+        intent.putExtra("mainMessage", "Filter Page");
+        startActivity(intent);
     }
 }
