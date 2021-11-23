@@ -53,15 +53,18 @@ public class MainActivity extends AppCompatActivity {
         //Initialize User Input Field
         EditText userInputText= findViewById(R.id.ingredientEditText);
 
-        //Initialize Ingredient ListView, List and Empty List Text
+        //Initialize Ingredient ListView and Ingredient List
         ListView ingredientListView= findViewById(R.id.ingredientList);
-        ArrayList<String> ingredientList= new ArrayList<String>();;
+        ArrayList<IngredientsView> ingredientList = new ArrayList<IngredientsView>();
+
+        //Initialize Empty Text and Set it
         TextView emptyListText= findViewById(R.id.emptyListText);
         ingredientListView.setEmptyView(emptyListText);
 
-        //Create List Adapter and Set it
-        ArrayAdapter<String> ingredientListAdapter = new ArrayAdapter<String>(MainActivity.this,
-                android.R.layout.simple_list_item_1, ingredientList);
+        //Initialize Adapter
+        IngredientsViewAdapter ingredientListAdapter = new IngredientsViewAdapter(this, ingredientList);
+
+        //Set Adapter
         ingredientListView.setAdapter(ingredientListAdapter);
 
         //Instantiate spoonDataService for API use
@@ -72,9 +75,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(!userInputText.getText().toString().equals("")) {
-                    ingredientList.add(userInputText.getText().toString());
+                    //Add Ingredient to list and display it
+                    String userIngredient= userInputText.getText().toString();
+                    ingredientList.add(new IngredientsView(R.drawable.ic_launcher_background, userIngredient));
                     ingredientListAdapter.notifyDataSetChanged();
+
+                    //Clear User Input
                     userInputText.setText("");
+
+                    //Change style of "next" btn and enable it
+                    nextPageBtn.setEnabled(true);
+                    nextPageBtn.setBackgroundColor(getResources().getColor(R.color.nutri_green));
                 }
             }
         });
@@ -90,11 +101,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                     @Override
                     public void onResponse(List<RecipeModel> recipeList) {
-                        //ArrayAdapter arrayAdapter= new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, recipeList);
-                        //ingredientList.setAdapter(arrayAdapter);
-
                         //Got to Filters Page
-                        //goToFilters(view);
+                        goToFilters(view);
                     }
                 });
             }
