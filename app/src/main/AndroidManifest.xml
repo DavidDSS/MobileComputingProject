@@ -16,6 +16,7 @@
         <activity
             android:name=".FilterPageActivity"
             android:exported="true"
+            android:windowSoftInputMode="adjustNothing"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

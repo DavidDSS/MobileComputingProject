@@ -96,6 +96,7 @@
         android:layout_gravity="center"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="32dp"
+        android:layout_marginTop="32dp"
         android:background="@color/btn_disabled"
         android:text="Next Step"
         android:textColor="@color/white"
