@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class IngredientsViewAdapter extends ArrayAdapter {
@@ -26,13 +28,12 @@ public class IngredientsViewAdapter extends ArrayAdapter {
 
         if (ingredientView == null) ingredientView = LayoutInflater.from(getContext()).inflate(R.layout.ingredient_custom_list, parent, false);
 
-        ImageView numbersImage = ingredientView.findViewById(R.id.ingredientImageView);
+        ImageView ingredientImage = ingredientView.findViewById(R.id.ingredientImageView);
         TextView ingredientName = ingredientView.findViewById(R.id.ingredientName);
         IngredientsView ingredientViewPos = (IngredientsView) getItem(position);
 
-        numbersImage.setImageResource(ingredientViewPos.getIngredientImageId());
         ingredientName.setText(ingredientViewPos.getIngredientName());
-
+        Picasso.get().load("https://spoonacular.com/cdn/ingredients_100x100/"+ingredientViewPos.getIngredientName()+".jpg").into(ingredientImage);
         return ingredientView;
     }
 }

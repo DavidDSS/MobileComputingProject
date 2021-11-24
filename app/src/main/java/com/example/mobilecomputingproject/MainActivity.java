@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -80,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 if(!userInputText.getText().toString().equals("")) {
                     //Add Ingredient to list and display it
                     String userIngredient= userInputText.getText().toString();
-                    IngredientsView ingredientsView= new IngredientsView(R.drawable.ic_launcher_background, userIngredient);
+                    IngredientsView ingredientsView= new IngredientsView(userIngredient);
                     ingredientList.add(ingredientsView);
                     ingredientListAdapter.notifyDataSetChanged();
 
