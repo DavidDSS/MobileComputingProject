@@ -30,9 +30,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    //Global variables related to lists and adapters
     ListView ingredientListView;
     ArrayList<IngredientsView> ingredientList;
     IngredientsViewAdapter ingredientListAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
