@@ -30,8 +30,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    public String mainMessage;
-
+    ListView ingredientListView;
+    ArrayList<IngredientsView> ingredientList;
+    IngredientsViewAdapter ingredientListAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,15 +55,15 @@ public class MainActivity extends AppCompatActivity {
         EditText userInputText= findViewById(R.id.ingredientEditText);
 
         //Initialize Ingredient ListView and Ingredient List
-        ListView ingredientListView= findViewById(R.id.ingredientList);
-        ArrayList<IngredientsView> ingredientList = new ArrayList<IngredientsView>();
+        ingredientListView= findViewById(R.id.ingredientList);
+        ingredientList = new ArrayList<IngredientsView>();
 
         //Initialize Empty Text and Set it
         TextView emptyListText= findViewById(R.id.emptyListText);
         ingredientListView.setEmptyView(emptyListText);
 
         //Initialize Adapter
-        IngredientsViewAdapter ingredientListAdapter = new IngredientsViewAdapter(this, ingredientList);
+        ingredientListAdapter = new IngredientsViewAdapter(this, ingredientList);
 
         //Set Adapter
         ingredientListView.setAdapter(ingredientListAdapter);
@@ -77,7 +78,8 @@ public class MainActivity extends AppCompatActivity {
                 if(!userInputText.getText().toString().equals("")) {
                     //Add Ingredient to list and display it
                     String userIngredient= userInputText.getText().toString();
-                    ingredientList.add(new IngredientsView(R.drawable.ic_launcher_background, userIngredient));
+                    IngredientsView ingredientsView= new IngredientsView(R.drawable.ic_launcher_background, userIngredient);
+                    ingredientList.add(ingredientsView);
                     ingredientListAdapter.notifyDataSetChanged();
 
                     //Clear User Input
@@ -107,11 +109,20 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
+
     }
 
+    //Go to Filters Page
     public void goToFilters(View view) {
         Intent intent = new Intent(MainActivity.this, FilterPageActivity.class);
         intent.putExtra("mainMessage", "Filter Page");
         startActivity(intent);
+    }
+
+    //Remove Ingredient
+    public void removeIngredient(View view) {
+        int position = ingredientListView.getPositionForView(view);
+        ingredientList.remove(position);
+        ingredientListAdapter.notifyDataSetChanged();
     }
 }
