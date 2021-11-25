@@ -25,11 +25,11 @@ public class SpoonDataService {
 
     public interface recipeByIngredientsResponseListener {
         void onError(String message);
-        void onResponse(List<RecipeModel> recipeList);
+        void onResponse(ArrayList<RecipeModel> recipeList);
     }
 
     public void getRecipeByIngredients(String ingredients, recipeByIngredientsResponseListener apiResponseListener){
-        List<RecipeModel> listOfRecipies = new ArrayList<>();
+        ArrayList<RecipeModel> listOfRecipes = new ArrayList<>();
         String url ="https://api.spoonacular.com/recipes/findByIngredients?ingredients="+ingredients+"&"+apiKey;
         JsonArrayRequest spoonRequest = new JsonArrayRequest(Request.Method.GET, url,null, new Response.Listener<JSONArray>() {
             @Override
@@ -41,12 +41,12 @@ public class SpoonDataService {
                         recipe.setRecipeId(recipeInfo.getInt("id"));
                         recipe.setTitle(recipeInfo.getString("title"));
                         recipe.setImage(recipeInfo.getString("image"));
-                        listOfRecipies.add(recipe);
+                        listOfRecipes.add(recipe);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                apiResponseListener.onResponse(listOfRecipies);
+                apiResponseListener.onResponse(listOfRecipes);
             }
         }, new Response.ErrorListener() {
             @Override

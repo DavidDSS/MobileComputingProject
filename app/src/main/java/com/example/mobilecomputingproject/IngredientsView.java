@@ -1,6 +1,8 @@
 package com.example.mobilecomputingproject;
 
-public class IngredientsView{
+import java.io.Serializable;
+
+public class IngredientsView implements Serializable {
         private String ingredientName;
 
         public IngredientsView(String ingredientName) {

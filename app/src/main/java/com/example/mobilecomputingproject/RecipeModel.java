@@ -1,6 +1,8 @@
 package com.example.mobilecomputingproject;
 
-public class RecipeModel {
+import java.io.Serializable;
+
+public class RecipeModel implements Serializable {
     private int recipeId;
     private String title;
     private String image;

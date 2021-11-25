@@ -9,7 +9,11 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class FilterPageActivity extends AppCompatActivity {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+public class FilterPageActivity extends AppCompatActivity implements Serializable {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,10 +28,10 @@ public class FilterPageActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+
         //Access Intent and Data
         Intent intent= getIntent();
-        String message = intent.getExtras().getString("mainMessage");
-        TextView textView = findViewById(R.id.filterText);
-        textView.setText(message);
+        List<RecipeModel> recipeList = (List<RecipeModel>) intent.getSerializableExtra("recipeList");
+        Toast.makeText(FilterPageActivity.this, recipeList.toString(), Toast.LENGTH_SHORT).show();
     }
 }

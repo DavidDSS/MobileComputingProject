@@ -92,14 +92,14 @@
         android:id="@+id/nextStepBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="32dp"
         android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
         android:background="@color/btn_disabled"
+        android:enabled="false"
         android:text="Next Step"
-        android:textColor="@color/white"
-        android:enabled="false"/>
+        android:textColor="@color/white" />
 
 </RelativeLayout>

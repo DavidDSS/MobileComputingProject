@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -28,10 +29,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Serializable {
     //Global variables related to lists and adapters
     ListView ingredientListView;
     ArrayList<IngredientsView> ingredientList;
@@ -106,9 +108,9 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Failed: "+message, Toast.LENGTH_SHORT).show();
                     }
                     @Override
-                    public void onResponse(List<RecipeModel> recipeList) {
+                    public void onResponse(ArrayList<RecipeModel> recipeList) {
                         //Got to Filters Page
-                        goToFilters(view);
+                        goToFilters(view, recipeList);
                     }
                 });
             }
@@ -117,9 +119,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Go to Filters Page
-    public void goToFilters(View view) {
+    public void goToFilters(View view, ArrayList<RecipeModel> recipeList) {
         Intent intent = new Intent(MainActivity.this, FilterPageActivity.class);
-        intent.putExtra("mainMessage", "Filter Page");
+        intent.putExtra("recipeList", recipeList);
         startActivity(intent);
     }
 
