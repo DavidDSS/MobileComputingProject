@@ -34,7 +34,9 @@
         <activity
             android:name=".MainActivity"
             android:windowSoftInputMode="adjustNothing"
-            android:exported="true" />
+            android:exported="true"
+            android:alwaysRetainTaskState="true"
+            android:launchMode="singleInstance"/>
         <activity
             android:name=".Splash"
             android:exported="true">
