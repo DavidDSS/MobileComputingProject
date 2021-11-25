@@ -32,6 +32,5 @@ public class FilterPageActivity extends AppCompatActivity implements Serializabl
         //Access Intent and Data
         Intent intent= getIntent();
         List<RecipeModel> recipeList = (List<RecipeModel>) intent.getSerializableExtra("recipeList");
-        Toast.makeText(FilterPageActivity.this, recipeList.toString(), Toast.LENGTH_SHORT).show();
     }
 }

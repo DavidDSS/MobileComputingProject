@@ -102,7 +102,12 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         nextPageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                spoonDataService.getRecipeByIngredients(userInputText.getText().toString(), new SpoonDataService.recipeByIngredientsResponseListener() {
+                String urlIngredientString="";
+                for(int q=0; q<ingredientList.size(); q++){
+                    urlIngredientString+=ingredientList.get(q).getIngredientName();
+                    if(q+1!=ingredientList.size()) urlIngredientString+=",";
+                }
+                spoonDataService.getRecipeByIngredients(urlIngredientString, new SpoonDataService.recipeByIngredientsResponseListener() {
                     @Override
                     public void onError(String message) {
                         Toast.makeText(MainActivity.this, "Failed: "+message, Toast.LENGTH_SHORT).show();
