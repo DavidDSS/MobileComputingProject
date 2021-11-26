@@ -26,4 +26,19 @@
             android:textSize="35dp"/>
     </androidx.appcompat.widget.Toolbar>
 
+    <TextView
+        android:id="@+id/recipeText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nutri_toolbar"
+        android:text="Recipes"
+        android:gravity="center"
+        android:textSize="30dp"
+        android:layout_margin="20dp"/>
+    <ListView
+        android:id="@+id/recipeList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/recipeText"
+        android:layout_marginBottom="20dp"/>
 </RelativeLayout>
