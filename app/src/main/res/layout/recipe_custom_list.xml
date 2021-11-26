@@ -13,19 +13,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_weight=".6">
+        android:layout_weight=".6"
+        android:padding="10dp"
+        android:paddingStart="40dp">
         <ImageView
             android:id="@+id/recipeImageView"
             android:layout_width="84dp"
             android:layout_height="84dp"
             android:padding="16dp"
-            android:layout_gravity="center"/>
+            android:layout_gravity="left"/>
         <TextView
             android:id="@+id/recipeName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="bottom|left"
+            android:gravity="center"
+            android:layout_gravity="center"
             android:textColor="@android:color/black"/>
 
     </LinearLayout>
