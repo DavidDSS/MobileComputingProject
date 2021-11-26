@@ -31,7 +31,7 @@ public class RecipeViewAdapter  extends ArrayAdapter {
         RecipeModel recipeViewPos = (RecipeModel) getItem(position);
 
         recipeName.setText(recipeViewPos.getTitle());
-        //Picasso.get().load("https://spoonacular.com/cdn/ingredients_100x100/" + recipeViewPos.getIngredientName() + ".jpg").into(ingredientImage);
+        Picasso.get().load(recipeViewPos.getImage()).into(recipeImage);
         return recipeView;
     }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mobilecomputingproject">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -14,10 +15,11 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".RecipePageActivity"
+            android:name=".RecipeListPageActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustNothing"
-            android:parentActivityName=".FilterPageActivity">
+            android:parentActivityName=".FilterPageActivity"
+            android:alwaysRetainTaskState="true">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".FilterPageActivity" />
@@ -26,7 +28,9 @@
             android:name=".FilterPageActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustNothing"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:alwaysRetainTaskState="true"
+            android:launchMode="singleTask">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />

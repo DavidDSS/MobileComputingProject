@@ -14,7 +14,7 @@ import androidx.appcompat.widget.Toolbar;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class RecipePageActivity extends AppCompatActivity implements Serializable {
+public class RecipeListPageActivity extends AppCompatActivity implements Serializable {
     //Global variables related to lists and adapters
     ListView recipeListView;
     ArrayList<RecipeModel> recipeList;

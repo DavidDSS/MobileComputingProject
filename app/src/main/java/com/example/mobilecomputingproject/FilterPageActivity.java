@@ -8,12 +8,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 public class FilterPageActivity extends AppCompatActivity implements Serializable {
 
@@ -47,7 +44,7 @@ public class FilterPageActivity extends AppCompatActivity implements Serializabl
 
     //Go to Recipes Page
     public void goToRecipes(View view, ArrayList<RecipeModel> recipeList) {
-        Intent intent = new Intent(FilterPageActivity.this, RecipePageActivity.class);
+        Intent intent = new Intent(FilterPageActivity.this, RecipeListPageActivity.class);
         intent.putExtra("recipeList", recipeList);
         startActivity(intent);
     }
