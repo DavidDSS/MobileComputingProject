@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         //Initialize Screen Elements
-
         //Initialize Buttons
         Button nextPageBtn = findViewById(R.id.nextStepBtn);
         Button addIngredientBtn = findViewById(R.id.addBtn);
@@ -120,7 +119,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                 });
             }
         });
-
     }
 
     //Go to Filters Page
