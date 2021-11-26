@@ -3,6 +3,7 @@ package com.example.mobilecomputingproject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -32,6 +33,10 @@ public class RecipePageActivity extends AppCompatActivity implements Serializabl
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        //Access Intent and Data
+        Intent intent= getIntent();
+        ArrayList<RecipeModel> recipeList = (ArrayList<RecipeModel>) intent.getSerializableExtra("recipeList");
+
         //Initialize Elements
         recipeListView= findViewById(R.id.recipeList);
 
@@ -40,8 +45,5 @@ public class RecipePageActivity extends AppCompatActivity implements Serializabl
 
         //Set Adapter
         recipeListView.setAdapter(recipeListAdapter);
-
-        //Access Intent and Data
-        Intent intent= getIntent();
     }
 }

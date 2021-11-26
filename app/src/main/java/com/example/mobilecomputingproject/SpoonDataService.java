@@ -37,7 +37,8 @@ public class SpoonDataService {
                 try {
                     for (int i=0; i< response.length(); i++) {
                         JSONObject recipeInfo = response.getJSONObject(i);
-                        RecipeModel recipe = new RecipeModel();
+                        RecipeModel recipe = new RecipeModel(recipeInfo.getInt("id"),
+                                recipeInfo.getString("title"),recipeInfo.getString("image"));
                         recipe.setRecipeId(recipeInfo.getInt("id"));
                         recipe.setTitle(recipeInfo.getString("title"));
                         recipe.setImage(recipeInfo.getString("image"));

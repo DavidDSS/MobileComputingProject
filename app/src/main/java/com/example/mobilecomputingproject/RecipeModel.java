@@ -13,9 +13,6 @@ public class RecipeModel implements Serializable {
         this.image = image;
     }
 
-    public RecipeModel(){
-    }
-
     @Override
     public String toString() {
         return "Recipe: " +

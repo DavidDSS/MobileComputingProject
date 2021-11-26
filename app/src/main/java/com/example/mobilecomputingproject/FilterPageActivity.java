@@ -6,6 +6,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,9 +30,25 @@ public class FilterPageActivity extends AppCompatActivity implements Serializabl
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-
         //Access Intent and Data
         Intent intent= getIntent();
-        List<RecipeModel> recipeList = (List<RecipeModel>) intent.getSerializableExtra("recipeList");
+        ArrayList<RecipeModel> recipeList = (ArrayList<RecipeModel>) intent.getSerializableExtra("recipeList");
+
+        //Initialize Elements
+        Button finalStepBtn= findViewById(R.id.finalStepBtn);
+
+        finalStepBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToRecipes(view, recipeList);
+            }
+        });
+    }
+
+    //Go to Recipes Page
+    public void goToRecipes(View view, ArrayList<RecipeModel> recipeList) {
+        Intent intent = new Intent(FilterPageActivity.this, RecipePageActivity.class);
+        intent.putExtra("recipeList", recipeList);
+        startActivity(intent);
     }
 }
