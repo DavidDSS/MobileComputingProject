@@ -54,6 +54,7 @@ public class RecipeListPageActivity extends AppCompatActivity implements Seriali
     public void goToRecipe(View view) {
         int position = recipeListView.getPositionForView(view);
         RecipeModel selectedRecipe= recipeList.get(position);
+
         spoonDataService.getRecipeInfoById(selectedRecipe.getRecipeId(), new SpoonDataService.recipeByIdResponseListener() {
             @Override
             public void onError(String message) {

@@ -33,7 +33,6 @@ public class RecipePageActivity extends AppCompatActivity {
         ArrayList<RecipeModel> recipeInfo = (ArrayList<RecipeModel>) intent.getSerializableExtra("recipeInfo");
         RecipeModel recipe= recipeInfo.get(0);
 
-        Toast.makeText(RecipePageActivity.this, recipe.toString(), Toast.LENGTH_SHORT).show();
     }
 
 }

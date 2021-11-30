@@ -71,8 +71,37 @@ public class SpoonDataService implements Serializable {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    RecipeModel recipeInfo = new RecipeModel(response.getInt("id"),
-                            response.getString("title"),response.getString("image"));
+                    int recipeId=response.getInt("id");
+                    String title=response.getString("title");
+                    String image=response.getString("image");
+                    Boolean isVegetarian=response.getBoolean("vegetarian");
+                    Boolean isGlutenFree=response.getBoolean("glutenFree");
+                    Boolean isVegan=response.getBoolean("vegan");
+                    Boolean isDairyFree=response.getBoolean("dairyFree");
+                    Boolean isHealthy=response.getBoolean("veryHealthy");
+                    Double pricePerServing=response.getDouble("pricePerServing");
+                    Double readyInMinutes=response.getDouble("readyInMinutes");
+                    int servings=response.getInt("servings");
+                    JSONArray analyzedInstructions= response.getJSONArray("analyzedInstructions").getJSONObject(0).getJSONArray("steps");
+                    JSONArray extendedIngredients= response.getJSONArray("extendedIngredients");
+                    ArrayList<String> steps= new ArrayList<String >();
+                    ArrayList<String> ingredientList= new ArrayList<String >();;
+
+                    //Get Steps and Ingredients
+                    for(int i=0; i<analyzedInstructions.length();i++) {
+                        JSONObject step= analyzedInstructions.getJSONObject(i);
+                        steps.add(step.getString("step"));
+                    }
+
+                    for(int i=0; i<extendedIngredients.length();i++) {
+                        JSONObject ingredient= extendedIngredients.getJSONObject(i);
+                        ingredientList.add(ingredient.getString("name"));
+                    }
+
+                    RecipeModel recipeInfo = new RecipeModel(recipeId,title,image
+                    ,isVegetarian, isGlutenFree, isVegan, isDairyFree, isHealthy,
+                            pricePerServing, readyInMinutes, servings, steps, ingredientList);
+
                     listOfRecipes.add(recipeInfo);
 
                 } catch (JSONException e) {

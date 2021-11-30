@@ -11,10 +11,11 @@ public class RecipeModel implements Serializable {
     private String image;
     private Boolean isVegetarian;
     private Boolean isVegan;
+    private Boolean isGlutenFree;
     private Boolean isDairyFree;
     private Boolean isHealthy;
-    private Float pricePerServing;
-    private Float readyInMinutes;
+    private Double pricePerServing;
+    private Double readyInMinutes;
     private int servings;
     private ArrayList<String> steps;
     private ArrayList<String> ingredients;
@@ -25,12 +26,13 @@ public class RecipeModel implements Serializable {
         this.image = image;
     }
 
-    public RecipeModel(int recipeId, String title, String image, Boolean isVegetarian, Boolean isVegan, Boolean isDairyFree, Boolean isHealthy, Float pricePerServing, Float readyInMinutes, int servings, ArrayList<String> steps, ArrayList<String> ingredients) {
+    public RecipeModel(int recipeId, String title, String image, Boolean isVegetarian, Boolean isVegan, Boolean isGlutenFree, Boolean isDairyFree, Boolean isHealthy, Double pricePerServing, Double readyInMinutes, int servings, ArrayList<String> steps, ArrayList<String> ingredients) {
         this.recipeId = recipeId;
         this.title = title;
         this.image = image;
         this.isVegetarian = isVegetarian;
         this.isVegan = isVegan;
+        this.isGlutenFree = isGlutenFree;
         this.isDairyFree = isDairyFree;
         this.isHealthy = isHealthy;
         this.pricePerServing = pricePerServing;
@@ -72,6 +74,14 @@ public class RecipeModel implements Serializable {
         isVegetarian = vegetarian;
     }
 
+    public Boolean getIsGlutenFree() {
+        return isGlutenFree;
+    }
+
+    public void setIsGlutenFree(Boolean glutenFree) {
+        isGlutenFree = glutenFree;
+    }
+
     public Boolean getVegan() {
         return isVegan;
     }
@@ -96,19 +106,19 @@ public class RecipeModel implements Serializable {
         isHealthy = healthy;
     }
 
-    public Float getPricePerServing() {
+    public Double getPricePerServing() {
         return pricePerServing;
     }
 
-    public void setPricePerServing(Float pricePerServing) {
+    public void setPricePerServing(Double pricePerServing) {
         this.pricePerServing = pricePerServing;
     }
 
-    public Float getReadyInMinutes() {
+    public Double getReadyInMinutes() {
         return readyInMinutes;
     }
 
-    public void setReadyInMinutes(Float readyInMinutes) {
+    public void setReadyInMinutes(Double readyInMinutes) {
         this.readyInMinutes = readyInMinutes;
     }
 
