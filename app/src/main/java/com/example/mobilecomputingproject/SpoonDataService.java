@@ -46,7 +46,7 @@ public class SpoonDataService implements Serializable {
                     for(int i=0; i<recipeList.length();i++){
                         JSONObject recipeInList=recipeList.getJSONObject(i);
                         RecipeModel recipe = new RecipeModel(recipeInList.getInt("id"),
-                                recipeInList.getString("title"),recipeInList.getString("image"),null);
+                                recipeInList.getString("title"),recipeInList.getString("image"));
                         listOfRecipes.add(recipe);
                     }
                 } catch (JSONException e) {
@@ -72,7 +72,7 @@ public class SpoonDataService implements Serializable {
             public void onResponse(JSONObject response) {
                 try {
                     RecipeModel recipeInfo = new RecipeModel(response.getInt("id"),
-                            response.getString("title"),response.getString("image"),null);
+                            response.getString("title"),response.getString("image"));
                     listOfRecipes.add(recipeInfo);
 
                 } catch (JSONException e) {

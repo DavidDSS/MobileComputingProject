@@ -33,7 +33,7 @@ public class RecipeViewAdapter  extends ArrayAdapter {
         RecipeModel recipeViewPos = (RecipeModel) getItem(position);
 
         recipeName.setText(recipeViewPos.getTitle());
-        recipeId.setText(recipeViewPos.getStringRecipeId());
+        recipeId.setText(Integer.toString(recipeViewPos.getRecipeId()));
         Picasso.get().load(recipeViewPos.getImage()).into(recipeImage);
         return recipeView;
     }
