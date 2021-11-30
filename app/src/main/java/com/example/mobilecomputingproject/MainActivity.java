@@ -105,18 +105,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                 }
                 //Got to Filters Page
                 goToFilters(view, urlIngredientString);
-                /*
-                spoonDataService.getRecipeByIngredients(urlIngredientString, new SpoonDataService.recipeByIngredientsResponseListener() {
-                    @Override
-                    public void onError(String message) {
-                        Toast.makeText(MainActivity.this, "Failed: "+message, Toast.LENGTH_SHORT).show();
-                    }
-                    @Override
-                    public void onResponse(ArrayList<RecipeModel> recipeList) {
-                        //Got to Filters Page
-                        goToFilters(view, recipeList);
-                    }
-                });*/
             }
         });
     }
