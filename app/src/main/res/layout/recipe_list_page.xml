@@ -35,6 +35,13 @@
         android:gravity="center"
         android:textSize="30dp"
         android:layout_margin="20dp"/>
+    <TextView
+        android:id="@+id/noSearchResults"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/emptySearch"
+        android:layout_below="@id/recipeText"
+        android:gravity="center"/>
     <ListView
         android:id="@+id/recipeList"
         android:layout_width="match_parent"

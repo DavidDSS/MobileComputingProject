@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
@@ -47,6 +48,10 @@ public class RecipeListPageActivity extends AppCompatActivity implements Seriali
 
         //Set Adapter
         recipeListView.setAdapter(recipeListAdapter);
+
+        //Initialize Empty Text and Set it
+        TextView noSearchresults= findViewById(R.id.noSearchResults);
+        recipeListView.setEmptyView(noSearchresults);
 
     }
 
