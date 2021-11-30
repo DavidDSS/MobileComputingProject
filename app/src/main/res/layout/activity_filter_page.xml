@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:id="@+id/filterRelativeLayout">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/nutri_toolbar"
@@ -16,14 +17,15 @@
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
         <TextView
+            android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="@string/app_name"
             android:textColor="@color/white"
-            android:layout_gravity="center"
-            android:id="@+id/toolbar_title"
-            android:textSize="35dp"/>
+            android:textSize="35dp" />
     </androidx.appcompat.widget.Toolbar>
 
     <TextView
@@ -31,8 +33,73 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/nutri_toolbar"
-        android:text=""
-        android:gravity="center"/>
+        android:layout_marginTop="80dp"
+        android:gravity="center"
+        android:text="Filters"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/priceRangeText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/filterText"
+        android:layout_marginTop="80dp"
+        android:gravity="center"
+        android:text="Price Range"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/cuisineText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/priceRangeText"
+        android:layout_marginTop="80dp"
+        android:gravity="center"
+        android:text="Cuisine"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/allergiesText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cuisineText"
+        android:layout_marginTop="80dp"
+        android:gravity="center"
+        android:text="Allergies"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/dietText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/allergiesText"
+        android:layout_marginTop="80dp"
+        android:gravity="center"
+        android:text="Diet"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <CheckBox
+        android:id="@+id/checkboxKeto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dietText"
+        android:text="Keto">
+    </CheckBox>
+
+    <Button
+        android:id="@+id/getRecipesButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dietText"
+        android:gravity="center"
+        android:text="Get Recipes">
+
+    </Button>
+
+
 
     <Button
         android:id="@+id/finalStepBtn"
