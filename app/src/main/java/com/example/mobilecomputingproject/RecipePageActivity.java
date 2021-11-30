@@ -2,11 +2,14 @@ package com.example.mobilecomputingproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -33,6 +36,9 @@ public class RecipePageActivity extends AppCompatActivity {
         ArrayList<RecipeModel> recipeInfo = (ArrayList<RecipeModel>) intent.getSerializableExtra("recipeInfo");
         RecipeModel recipe= recipeInfo.get(0);
 
+        //Display Recipe Name
+        TextView recipeName= findViewById(R.id.recipeName);
+        recipeName.setText(recipe.getTitle());
     }
 
 }
