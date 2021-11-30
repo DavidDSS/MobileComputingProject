@@ -73,9 +73,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         //Set Adapter
         ingredientListView.setAdapter(ingredientListAdapter);
 
-        //Instantiate spoonDataService for API use
-        final SpoonDataService spoonDataService= new SpoonDataService(MainActivity.this);
-
         //Add Ingredient Functionality
         addIngredientBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,25 +103,16 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                     urlIngredientString+=ingredientList.get(q).getIngredientName();
                     if(q+1!=ingredientList.size()) urlIngredientString+=",";
                 }
-                spoonDataService.getRecipeByIngredients(urlIngredientString, new SpoonDataService.recipeByIngredientsResponseListener() {
-                    @Override
-                    public void onError(String message) {
-                        Toast.makeText(MainActivity.this, "Failed: "+message, Toast.LENGTH_SHORT).show();
-                    }
-                    @Override
-                    public void onResponse(ArrayList<RecipeModel> recipeList) {
-                        //Got to Filters Page
-                        goToFilters(view, recipeList);
-                    }
-                });
+                //Got to Filters Page
+                goToFilters(view, urlIngredientString);
             }
         });
     }
 
     //Go to Filters Page
-    public void goToFilters(View view, ArrayList<RecipeModel> recipeList) {
+    public void goToFilters(View view, String ingredientList) {
         Intent intent = new Intent(MainActivity.this, FilterPageActivity.class);
-        intent.putExtra("recipeList", recipeList);
+        intent.putExtra("ingredientList", ingredientList);
         startActivity(intent);
     }
 

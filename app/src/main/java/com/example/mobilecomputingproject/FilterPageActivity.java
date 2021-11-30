@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -15,6 +16,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class FilterPageActivity extends AppCompatActivity implements Serializable {
 import java.util.ArrayList;
 
 public class FilterPageActivity extends AppCompatActivity {
@@ -41,13 +46,42 @@ public class FilterPageActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        //Instantiate spoonDataService for API use
+        final SpoonDataService spoonDataService= new SpoonDataService(FilterPageActivity.this);
+
         //Access Intent and Data
         Intent intent= getIntent();
-        String message = intent.getExtras().getString("mainMessage");
-        TextView textView = findViewById(R.id.filterText);
-        textView.setText(message);
+        String ingredientList = (String) intent.getSerializableExtra("ingredientList");
+
+        //Initialize Elements
+        Button finalStepBtn= findViewById(R.id.finalStepBtn);
+
+        finalStepBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String filterList="";
+                spoonDataService.getRecipeByIngredients(ingredientList, filterList, new SpoonDataService.recipeByIngredientsResponseListener() {
+                    @Override
+                    public void onError(String message) {
+                        Toast.makeText(FilterPageActivity.this, "Failed: "+message, Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public void onResponse(ArrayList<RecipeModel> recipeList) {
+                        //Got to Filters Page
+                        goToRecipes(view, recipeList);
+                    }
+                });
+            }
+        });
+
     }
 
+    //Go to Recipes Page
+    public void goToRecipes(View view, ArrayList<RecipeModel> recipeList) {
+        Intent intent = new Intent(FilterPageActivity.this, RecipeListPageActivity.class);
+        intent.putExtra("recipeList", recipeList);
+        startActivity(intent);
+    }
 
     public void setupDiets(){
         String[] diets = {
@@ -55,8 +89,7 @@ public class FilterPageActivity extends AppCompatActivity {
                 "Ovo-Vegetarian", "Vegan", "Pescetarian", "Paleo",
                 "Primal", "Low FODMAP", "Whole30"
         };
-        this.diets = new ArrayList<>();
-        createDietsRadioButtons(diets, "DietCheckbox", R.id.dietText, 56000);
+        createCheckboxArray(diets, "DietCheckbox", R.id.dietText, 56000);
     }
 
 
@@ -68,11 +101,10 @@ public class FilterPageActivity extends AppCompatActivity {
                 "Latin American", "Mediterranean", "Mexican", "Middle Eastern",
                 "Nordic", "Southern", "Spanish", "Thai", "Vietnamese"
         };
-        this.cuisines = new ArrayList<>();
-        createCuisineCheckboxes(cuisines, "CuisineCheckbox", R.id.cuisineText, 57000);
+        createCheckboxArray(cuisines, "CuisineCheckbox", R.id.cuisineText, 57000);
     }
 
-    public void createCuisineCheckboxes(String[] array, String tagName, int placeBelowID, int idStart){
+    public void createCheckboxArray(String[] array, String tagName, int placeBelowID, int idStart){
         for (int i=0; i<array.length; i++) {
             CheckBox temp =  new CheckBox(this);
             temp.setTag(array[i]+tagName);
