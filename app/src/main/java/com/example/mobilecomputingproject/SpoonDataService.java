@@ -7,6 +7,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,25 +29,23 @@ public class SpoonDataService {
         void onResponse(ArrayList<RecipeModel> recipeList);
     }
 
-    public interface recipeByIdResponseListener {
+    /*public interface recipeByIdResponseListener {
         void onError(String message);
         void onResponse(RecipeModel recipeInfo);
-    }
+    }*/
 
-    public void getRecipeByIngredients(String ingredients, recipeByIngredientsResponseListener apiResponseListener){
+    public void getRecipeByIngredients(String ingredients, String filters, recipeByIngredientsResponseListener apiResponseListener){
         ArrayList<RecipeModel> listOfRecipes = new ArrayList<>();
-        String url ="https://api.spoonacular.com/recipes/findByIngredients?ingredients="+ingredients+"&"+apiKey;
-        JsonArrayRequest spoonRequest = new JsonArrayRequest(Request.Method.GET, url,null, new Response.Listener<JSONArray>() {
+        String url ="https://api.spoonacular.com/recipes/complexSearch?query="+ingredients+""+filters+"&"+apiKey;
+        JsonObjectRequest spoonRequest = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(JSONArray response) {
+            public void onResponse(JSONObject response) {
                 try {
-                    for (int i=0; i< response.length(); i++) {
-                        JSONObject recipeInfo = response.getJSONObject(i);
-                        RecipeModel recipe = new RecipeModel(recipeInfo.getInt("id"),
-                                recipeInfo.getString("title"),recipeInfo.getString("image"),null);
-                        recipe.setRecipeId(recipeInfo.getInt("id"));
-                        recipe.setTitle(recipeInfo.getString("title"));
-                        recipe.setImage(recipeInfo.getString("image"));
+                    JSONArray recipeList = response.getJSONArray("results");
+                    for(int i=0; i<recipeList.length();i++){
+                        JSONObject recipeInList=recipeList.getJSONObject(i);
+                        RecipeModel recipe = new RecipeModel(recipeInList.getInt("id"),
+                                recipeInList.getString("title"),recipeInList.getString("image"),null);
                         listOfRecipes.add(recipe);
                     }
                 } catch (JSONException e) {
@@ -63,22 +62,20 @@ public class SpoonDataService {
         RequestSingleton.getInstance(context).addToRequestQueue(spoonRequest);
     }
 
-    public void getRecipeInfoById(int recipeId, recipeByIngredientsResponseListener apiResponseListener){
+    /*
+    public void getRecipeInfoById(int recipeId, recipeByIdResponseListener apiResponseListener){
         ArrayList<RecipeModel> listOfRecipes = new ArrayList<>();
-        String url ="https://api.spoonacular.com/recipes/findByIngredients?ingredients="+recipeId+"&"+apiKey;
-        JsonArrayRequest spoonRequest = new JsonArrayRequest(Request.Method.GET, url,null, new Response.Listener<JSONArray>() {
+        String url ="https://api.spoonacular.com/recipes/"+recipeId+"/information?includeNutrition=true&"+apiKey;
+        JsonArrayRequest spoonRequest = new JsonArrayRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(JSONArray response) {
+            public void onResponse(JSONObject response) {
                 try {
-                    for (int i=0; i< response.length(); i++) {
-                        JSONObject recipeInfo = response.getJSONObject(i);
-                        RecipeModel recipe = new RecipeModel(recipeInfo.getInt("id"),
-                                recipeInfo.getString("title"),recipeInfo.getString("image"),null);
-                        recipe.setRecipeId(recipeInfo.getInt("id"));
-                        recipe.setTitle(recipeInfo.getString("title"));
-                        recipe.setImage(recipeInfo.getString("image"));
-                        listOfRecipes.add(recipe);
-                    }
+                    RecipeModel recipeInfo = new RecipeModel(response.getInt("id"),
+                            response.getString("title"),response.getString("image"),null);
+                    recipeInfo.setRecipeInfo(response);
+
+                    listOfRecipes.add(recipeInfo);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -91,5 +88,5 @@ public class SpoonDataService {
             }
         });
         RequestSingleton.getInstance(context).addToRequestQueue(spoonRequest);
-    }
+    }*/
 }

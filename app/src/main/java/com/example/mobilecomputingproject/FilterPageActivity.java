@@ -38,9 +38,12 @@ public class FilterPageActivity extends AppCompatActivity implements Serializabl
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        //Instantiate spoonDataService for API use
+        final SpoonDataService spoonDataService= new SpoonDataService(FilterPageActivity.this);
+
         //Access Intent and Data
         Intent intent= getIntent();
-        ArrayList<RecipeModel> recipeList = (ArrayList<RecipeModel>) intent.getSerializableExtra("recipeList");
+        String ingredientList = (String) intent.getSerializableExtra("ingredientList");
 
         //Initialize Elements
         Button finalStepBtn= findViewById(R.id.finalStepBtn);
@@ -48,7 +51,18 @@ public class FilterPageActivity extends AppCompatActivity implements Serializabl
         finalStepBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToRecipes(view, recipeList);
+                String filterList="";
+                spoonDataService.getRecipeByIngredients(ingredientList, filterList, new SpoonDataService.recipeByIngredientsResponseListener() {
+                    @Override
+                    public void onError(String message) {
+                        Toast.makeText(FilterPageActivity.this, "Failed: "+message, Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public void onResponse(ArrayList<RecipeModel> recipeList) {
+                        //Got to Filters Page
+                        goToRecipes(view, recipeList);
+                    }
+                });
             }
         });
 
