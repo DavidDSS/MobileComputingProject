@@ -2,7 +2,9 @@ package com.example.mobilecomputingproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +18,9 @@ public class RecipeListPageActivity extends AppCompatActivity implements Seriali
     ListView recipeListView;
     ArrayList<RecipeModel> recipeList;
     RecipeViewAdapter recipeListAdapter;
+
+    //Instantiate spoonDataService for API use
+    final SpoonDataService spoonDataService= new SpoonDataService(RecipeListPageActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +37,7 @@ public class RecipeListPageActivity extends AppCompatActivity implements Seriali
 
         //Access Intent and Data
         Intent intent= getIntent();
-        ArrayList<RecipeModel> recipeList = (ArrayList<RecipeModel>) intent.getSerializableExtra("recipeList");
+        recipeList = (ArrayList<RecipeModel>) intent.getSerializableExtra("recipeList");
 
         //Initialize Elements
         recipeListView= findViewById(R.id.recipeList);
@@ -43,6 +48,25 @@ public class RecipeListPageActivity extends AppCompatActivity implements Seriali
         //Set Adapter
         recipeListView.setAdapter(recipeListAdapter);
 
+    }
+
+    //Go to Recipe Page
+    public void goToRecipe(View view) {
+        int position = recipeListView.getPositionForView(view);
+        RecipeModel selectedRecipe= recipeList.get(position);
+        spoonDataService.getRecipeInfoById(selectedRecipe.getRecipeId(), new SpoonDataService.recipeByIdResponseListener() {
+            @Override
+            public void onError(String message) {
+                Toast.makeText(RecipeListPageActivity.this, "Failed: "+message, Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onResponse(ArrayList<RecipeModel> recipeInfo) {
+                //Got to Recipe Page
+                Intent intent = new Intent(RecipeListPageActivity.this, RecipePageActivity.class);
+                intent.putExtra("recipeInfo", recipeInfo);
+                startActivity(intent);
+            }
+        });
 
     }
 }

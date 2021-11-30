@@ -15,11 +15,22 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".RecipePageActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustNothing"
+            android:parentActivityName=".RecipeListPageActivity"
+            android:alwaysRetainTaskState="true">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".RecipeListPageActivity" />
+        </activity>
+        <activity
             android:name=".RecipeListPageActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustNothing"
             android:parentActivityName=".FilterPageActivity"
-            android:alwaysRetainTaskState="true">
+            android:alwaysRetainTaskState="true"
+            android:launchMode="singleTask">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".FilterPageActivity" />

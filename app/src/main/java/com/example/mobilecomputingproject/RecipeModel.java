@@ -30,6 +30,10 @@ public class RecipeModel implements Serializable {
         return recipeId;
     }
 
+    public String getStringRecipeId() {
+        return Integer.toString(recipeId);
+    }
+
     public void setRecipeId(int recipeId) {
         this.recipeId = recipeId;
     }

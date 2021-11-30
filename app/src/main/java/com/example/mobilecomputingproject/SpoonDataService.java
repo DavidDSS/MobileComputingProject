@@ -13,10 +13,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpoonDataService {
+public class SpoonDataService implements Serializable {
     public String apiKey= "apiKey=706ba02fd189452e96b3fef538d9d6ff";
     Context context;
 
@@ -65,13 +66,13 @@ public class SpoonDataService {
 
     public void getRecipeInfoById(int recipeId, recipeByIdResponseListener apiResponseListener){
         ArrayList<RecipeModel> listOfRecipes = new ArrayList<>();
-        String url ="https://api.spoonacular.com/recipes/"+recipeId+"/information?includeNutrition=true&"+apiKey;
+        String url ="https://api.spoonacular.com/recipes/"+recipeId+"/information?includeNutrition=false&"+apiKey;
         JsonObjectRequest spoonRequest = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
                     RecipeModel recipeInfo = new RecipeModel(response.getInt("id"),
-                            response.getString("title"),response.getString("image"),response);
+                            response.getString("title"),response.getString("image"),null);
                     listOfRecipes.add(recipeInfo);
 
                 } catch (JSONException e) {

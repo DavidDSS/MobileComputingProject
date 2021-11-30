@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -28,10 +29,11 @@ public class RecipeViewAdapter  extends ArrayAdapter {
 
         ImageView recipeImage = recipeView.findViewById(R.id.recipeImageView);
         TextView recipeName = recipeView.findViewById(R.id.recipeName);
+        TextView recipeId = recipeView.findViewById(R.id.recipeId);
         RecipeModel recipeViewPos = (RecipeModel) getItem(position);
 
-
         recipeName.setText(recipeViewPos.getTitle());
+        recipeId.setText(recipeViewPos.getStringRecipeId());
         Picasso.get().load(recipeViewPos.getImage()).into(recipeImage);
         return recipeView;
     }
