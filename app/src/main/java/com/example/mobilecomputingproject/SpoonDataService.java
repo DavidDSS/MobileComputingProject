@@ -28,6 +28,11 @@ public class SpoonDataService {
         void onResponse(ArrayList<RecipeModel> recipeList);
     }
 
+    public interface recipeByIdResponseListener {
+        void onError(String message);
+        void onResponse(RecipeModel recipeInfo);
+    }
+
     public void getRecipeByIngredients(String ingredients, recipeByIngredientsResponseListener apiResponseListener){
         ArrayList<RecipeModel> listOfRecipes = new ArrayList<>();
         String url ="https://api.spoonacular.com/recipes/findByIngredients?ingredients="+ingredients+"&"+apiKey;
@@ -38,7 +43,37 @@ public class SpoonDataService {
                     for (int i=0; i< response.length(); i++) {
                         JSONObject recipeInfo = response.getJSONObject(i);
                         RecipeModel recipe = new RecipeModel(recipeInfo.getInt("id"),
-                                recipeInfo.getString("title"),recipeInfo.getString("image"));
+                                recipeInfo.getString("title"),recipeInfo.getString("image"),null);
+                        recipe.setRecipeId(recipeInfo.getInt("id"));
+                        recipe.setTitle(recipeInfo.getString("title"));
+                        recipe.setImage(recipeInfo.getString("image"));
+                        listOfRecipes.add(recipe);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                apiResponseListener.onResponse(listOfRecipes);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                apiResponseListener.onError("Error!");
+            }
+        });
+        RequestSingleton.getInstance(context).addToRequestQueue(spoonRequest);
+    }
+
+    public void getRecipeInfoById(int recipeId, recipeByIngredientsResponseListener apiResponseListener){
+        ArrayList<RecipeModel> listOfRecipes = new ArrayList<>();
+        String url ="https://api.spoonacular.com/recipes/findByIngredients?ingredients="+recipeId+"&"+apiKey;
+        JsonArrayRequest spoonRequest = new JsonArrayRequest(Request.Method.GET, url,null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+                    for (int i=0; i< response.length(); i++) {
+                        JSONObject recipeInfo = response.getJSONObject(i);
+                        RecipeModel recipe = new RecipeModel(recipeInfo.getInt("id"),
+                                recipeInfo.getString("title"),recipeInfo.getString("image"),null);
                         recipe.setRecipeId(recipeInfo.getInt("id"));
                         recipe.setTitle(recipeInfo.getString("title"));
                         recipe.setImage(recipeInfo.getString("image"));

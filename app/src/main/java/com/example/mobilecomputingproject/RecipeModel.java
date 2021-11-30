@@ -1,16 +1,20 @@
 package com.example.mobilecomputingproject;
 
+import org.json.JSONObject;
+
 import java.io.Serializable;
 
 public class RecipeModel implements Serializable {
     private int recipeId;
     private String title;
     private String image;
+    private JSONObject recipeInfo;
 
-    public RecipeModel(int recipeId, String title, String image) {
+    public RecipeModel(int recipeId, String title, String image, JSONObject recipeInfo) {
         this.recipeId = recipeId;
         this.title = title;
         this.image = image;
+        this.recipeInfo= recipeInfo;
     }
 
     @Override
@@ -44,5 +48,13 @@ public class RecipeModel implements Serializable {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public JSONObject getRecipeInfo() {
+        return recipeInfo;
+    }
+
+    public void setRecipeInfo(JSONObject recipeInfo) {
+        this.recipeInfo = recipeInfo;
     }
 }

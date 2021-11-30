@@ -42,5 +42,7 @@ public class RecipeListPageActivity extends AppCompatActivity implements Seriali
 
         //Set Adapter
         recipeListView.setAdapter(recipeListAdapter);
+
+
     }
 }
