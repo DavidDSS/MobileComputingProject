@@ -52,17 +52,19 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"/>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/addBtn"
+            android:theme="@style/Theme.MaterialComponents"
             android:layout_width="0dp"
             android:layout_weight=".20"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:layout_toRightOf="@id/ingredientEditText"
-            android:background="@color/nutri_green"
+            android:backgroundTint="@color/nutri_green"
             android:text="Add"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            app:cornerRadius="12dp"/>
     </LinearLayout>
 
     <TextView
@@ -89,8 +91,9 @@
         android:layout_above="@id/nextStepBtn"
         android:layout_below="@id/ingredientListTitle" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/nextStepBtn"
+        android:theme="@style/Theme.MaterialComponents"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -98,9 +101,11 @@
         android:layout_gravity="center"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="32dp"
-        android:background="@color/btn_disabled"
+        android:backgroundTint="@color/btn_disabled"
         android:enabled="false"
         android:text="Next Step"
-        android:textColor="@color/white" />
+        android:padding="10dp"
+        android:textColor="@color/white"
+        app:cornerRadius="12dp"/>
 
 </RelativeLayout>

@@ -89,10 +89,9 @@
     </RadioGroup>
 
 
-
-
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/finalStepBtn"
+        android:theme="@style/Theme.MaterialComponents"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -100,9 +99,9 @@
         android:layout_gravity="center"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="32dp"
-        android:background="@color/nutri_green"
-        android:text="Get Recipes"
-        android:textColor="@color/white"
+        android:backgroundTint="@color/nutri_green"
         android:padding="10dp"
-        android:onClick="getRecipes"/>
+        android:text="Get Recipes"
+        app:cornerRadius="12dp"
+        android:textColor="@color/white"/>
 </RelativeLayout>
