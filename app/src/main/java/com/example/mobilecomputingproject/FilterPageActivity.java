@@ -18,11 +18,9 @@ import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
-public class FilterPageActivity extends AppCompatActivity implements Serializable {
 import java.util.ArrayList;
 
-public class FilterPageActivity extends AppCompatActivity {
+public class FilterPageActivity extends AppCompatActivity implements Serializable {
 
     RelativeLayout pageLayout;
     ArrayList<CheckBox> cuisines;
@@ -60,6 +58,8 @@ public class FilterPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String filterList="";
+                filterList = getFilters();
+                System.out.println(filterList);
                 spoonDataService.getRecipeByIngredients(ingredientList, filterList, new SpoonDataService.recipeByIngredientsResponseListener() {
                     @Override
                     public void onError(String message) {
@@ -67,7 +67,6 @@ public class FilterPageActivity extends AppCompatActivity {
                     }
                     @Override
                     public void onResponse(ArrayList<RecipeModel> recipeList) {
-                        //Got to Filters Page
                         goToRecipes(view, recipeList);
                     }
                 });
@@ -89,7 +88,8 @@ public class FilterPageActivity extends AppCompatActivity {
                 "Ovo-Vegetarian", "Vegan", "Pescetarian", "Paleo",
                 "Primal", "Low FODMAP", "Whole30"
         };
-        createCheckboxArray(diets, "DietCheckbox", R.id.dietText, 56000);
+        this.diets = new ArrayList<>();
+        createDietsRadioButtons(diets, "DietRadioButton", R.id.dietText, 56000);
     }
 
 
@@ -101,6 +101,7 @@ public class FilterPageActivity extends AppCompatActivity {
                 "Latin American", "Mediterranean", "Mexican", "Middle Eastern",
                 "Nordic", "Southern", "Spanish", "Thai", "Vietnamese"
         };
+        this.cuisines = new ArrayList<>();
         createCheckboxArray(cuisines, "CuisineCheckbox", R.id.cuisineText, 57000);
     }
 
@@ -118,7 +119,6 @@ public class FilterPageActivity extends AppCompatActivity {
                 if((i%3)>0) params.addRule(RelativeLayout.RIGHT_OF, idStart+i-1);
                 if ((i/3)!=0) params.addRule(RelativeLayout.BELOW, idStart+i-3);
                 else params.addRule(RelativeLayout.BELOW, placeBelowID);
-                System.out.println(findViewById(idStart+i-1).toString());
             }
             else params.addRule(RelativeLayout.BELOW, placeBelowID);
 
@@ -146,7 +146,6 @@ public class FilterPageActivity extends AppCompatActivity {
                 if((i%3)>0) params.addRule(RelativeLayout.RIGHT_OF, idStart+i-1);
                 if ((i/3)!=0) params.addRule(RelativeLayout.BELOW, idStart+i-3);
                 else params.addRule(RelativeLayout.BELOW, placeBelowID);
-                System.out.println(findViewById(idStart+i-1).toString());
             }
             else params.addRule(RelativeLayout.BELOW, placeBelowID);
 
@@ -159,16 +158,28 @@ public class FilterPageActivity extends AppCompatActivity {
         }
     }
 
-    public void getRecipes(View view){
+    public String getFilters(){
+        String dietFilter = "";
         for (RadioButton diet : diets) {
-            if (diet.isChecked()){
-                // search for the diet in spoonacular
-            }
+            if (diet.isChecked()) dietFilter += diet.getText();
         }
+        String cuisineFilter = "";
         for (CheckBox cuisine : cuisines) {
-            if (cuisine.isChecked()){
-                // search for the cuisineget in spoonacular
+            if (cuisine.isChecked()) {
+                if (cuisineFilter!="") cuisineFilter+=",";
+                cuisineFilter += cuisine.getText();
             }
+
+        }
+
+        if (dietFilter!="" && cuisineFilter!=""){
+            return "diet="+dietFilter+"&"+"cuisine="+cuisineFilter;
+        } else if (dietFilter!=""){
+            return "diet="+dietFilter;
+        } else if (cuisineFilter!=""){
+            return "cuisine="+cuisineFilter;
+        } else {
+            return "";
         }
     }
 
