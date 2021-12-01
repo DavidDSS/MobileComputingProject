@@ -34,5 +34,26 @@
         android:layout_below="@id/nutri_toolbar"
         android:gravity="center"
         android:layout_margin="10dp"/>
+    <ImageView
+        android:id="@+id/recipeImage"
+        android:layout_below="@id/recipeName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"/>
+    <TextView
+        android:id="@+id/ingredientText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_below="@id/recipeImage"
+        android:gravity="center"
+        android:text="Ingredients:"
+        android:layout_margin="10dp"/>
+    <ListView
+        android:id="@+id/ingredientListView"
+        android:layout_below="@id/ingredientText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"/>
 
 </RelativeLayout>
