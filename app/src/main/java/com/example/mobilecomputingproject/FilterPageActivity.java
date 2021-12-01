@@ -173,11 +173,11 @@ public class FilterPageActivity extends AppCompatActivity implements Serializabl
         }
 
         if (dietFilter!="" && cuisineFilter!=""){
-            return "diet="+dietFilter+"&"+"cuisine="+cuisineFilter;
+            return "&diet="+dietFilter+"&"+"cuisine="+cuisineFilter;
         } else if (dietFilter!=""){
-            return "diet="+dietFilter;
+            return "&diet="+dietFilter;
         } else if (cuisineFilter!=""){
-            return "cuisine="+cuisineFilter;
+            return "&cuisine="+cuisineFilter;
         } else {
             return "";
         }
