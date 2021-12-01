@@ -38,6 +38,14 @@
         android:text="Filters"
         android:textSize="20sp"
         android:textStyle="bold" />
+
+    <ProgressBar
+        android:layout_below="@id/filterText"
+        android:id="@+id/loadingSpinner"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
     <TextView
         android:id="@+id/priceRangeText"
         android:layout_width="match_parent"

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ public class RecipeListPageActivity extends AppCompatActivity implements Seriali
     ListView recipeListView;
     ArrayList<RecipeModel> recipeList;
     RecipeViewAdapter recipeListAdapter;
+    ProgressBar spinner;
 
     //Instantiate spoonDataService for API use
     final SpoonDataService spoonDataService= new SpoonDataService(RecipeListPageActivity.this);
@@ -42,6 +44,7 @@ public class RecipeListPageActivity extends AppCompatActivity implements Seriali
 
         //Initialize Elements
         recipeListView= findViewById(R.id.recipeList);
+        spinner= (ProgressBar) findViewById(R.id.loadingSpinner);
 
         //Initialize Adapter
         recipeListAdapter = new RecipeViewAdapter(this, recipeList);
@@ -57,6 +60,7 @@ public class RecipeListPageActivity extends AppCompatActivity implements Seriali
 
     //Go to Recipe Page
     public void goToRecipe(View view) {
+        spinner.setVisibility(view.VISIBLE);
         int position = recipeListView.getPositionForView(view);
         RecipeModel selectedRecipe= recipeList.get(position);
 
@@ -70,6 +74,7 @@ public class RecipeListPageActivity extends AppCompatActivity implements Seriali
                 //Got to Recipe Page
                 Intent intent = new Intent(RecipeListPageActivity.this, RecipePageActivity.class);
                 intent.putExtra("recipeInfo", recipeInfo);
+                spinner.setVisibility(view.GONE);
                 startActivity(intent);
             }
         });

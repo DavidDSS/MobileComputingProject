@@ -7,6 +7,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.4218106995884774" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.1361111111111111" />
         <entry key="app/src/main/res/layout/ingredient_custom_list.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/loading_spinner.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/recipe_custom_list.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/recipe_list_page.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/recipe_page.xml" value="0.3098958333333333" />

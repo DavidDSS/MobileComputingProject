@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -25,6 +26,7 @@ public class FilterPageActivity extends AppCompatActivity implements Serializabl
     RelativeLayout pageLayout;
     ArrayList<CheckBox> cuisines;
     ArrayList<RadioButton> diets;
+    ProgressBar spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +56,12 @@ public class FilterPageActivity extends AppCompatActivity implements Serializabl
         //Initialize Elements
         Button finalStepBtn= findViewById(R.id.finalStepBtn);
 
+        spinner= (ProgressBar) findViewById(R.id.loadingSpinner);
+
         finalStepBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                spinner.setVisibility(view.VISIBLE);
                 String filterList="";
                 filterList = getFilters();
                 System.out.println(filterList);
@@ -67,6 +72,7 @@ public class FilterPageActivity extends AppCompatActivity implements Serializabl
                     }
                     @Override
                     public void onResponse(ArrayList<RecipeModel> recipeList) {
+                        spinner.setVisibility(View.GONE);
                         goToRecipes(view, recipeList);
                     }
                 });
