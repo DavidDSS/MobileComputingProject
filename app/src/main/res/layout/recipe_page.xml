@@ -5,8 +5,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="horizontal">
+    tools:context=".RecipePageActivity"
+    android:orientation="horizontal"
+    app:layout_behavior = "@string/appbar_scrolling_view_behavior">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/nutri_toolbar"
@@ -26,34 +27,67 @@
             android:textSize="35dp"/>
     </androidx.appcompat.widget.Toolbar>
 
-    <TextView
-        android:id="@+id/recipeName"
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30dp"
+        android:layout_height="match_parent"
         android:layout_below="@id/nutri_toolbar"
-        android:gravity="center"
-        android:layout_margin="10dp"/>
-    <ImageView
-        android:id="@+id/recipeImage"
-        android:layout_below="@id/recipeName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"/>
-    <TextView
-        android:id="@+id/ingredientText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_below="@id/recipeImage"
-        android:gravity="center"
-        android:text="Ingredients:"
-        android:layout_margin="10dp"/>
-    <ListView
-        android:id="@+id/ingredientListView"
-        android:layout_below="@id/ingredientText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"/>
+        android:fillViewport="true">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <TextView
+            android:id="@+id/recipeName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:textSize="30dp" />
+
+        <ImageView
+            android:id="@+id/recipeImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/recipeName"
+            android:layout_margin="10dp" />
+
+        <TextView
+            android:id="@+id/ingredientText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/recipeImage"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="Ingredients:"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/ingredientListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ingredientText"
+            android:layout_margin="10dp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/stepsText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ingredientListView"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="Steps:"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/stepsListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/stepsText"
+            android:layout_margin="10dp"
+            android:gravity="center"/>
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

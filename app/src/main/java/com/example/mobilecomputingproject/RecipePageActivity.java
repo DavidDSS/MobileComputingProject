@@ -50,10 +50,19 @@ public class RecipePageActivity extends AppCompatActivity {
         Picasso.get().load(recipe.getImage()).into(recipePic);
 
         //Display Ingredients
-        ListView ingredientListView= findViewById(R.id.ingredientListView);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, recipe.getIngredients());
-        ingredientListView.setAdapter(adapter);
+        TextView ingredientListView= findViewById(R.id.ingredientListView);
+
+        for(int p=0; p<recipe.getIngredients().size(); p++){
+            ingredientListView.setText(ingredientListView.getText()+"•"+recipe.getIngredients().get(p)+"\n");
+        }
+
+
+        //Display Steps
+        TextView stepsListView= findViewById(R.id.stepsListView);
+
+        for(int p=0; p<recipe.getSteps().size(); p++){
+            stepsListView.setText(stepsListView.getText()+"•"+recipe.getSteps().get(p)+"\n\n");
+        }
 
 
     }
