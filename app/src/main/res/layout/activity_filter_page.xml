@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/nutri_toolbar"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="Filters"
         android:textSize="20sp"
@@ -51,7 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/filterText"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="30dp"
         android:gravity="center"
         android:text="Price Range"
         android:textSize="16sp"
@@ -62,18 +62,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/priceRangeText"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="50dp"
         android:gravity="center"
         android:text="Cuisine"
         android:textSize="16sp"
         android:textStyle="bold" />
 
+    <ScrollView
+        android:id="@+id/cuisineScroller"
+        android:layout_width="fill_parent"
+        android:layout_height="150dp"
+        android:scrollbars="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@id/cuisineText"
+        android:background="@drawable/stroke_background"
+        android:layout_weight="1">
+
+        <TableLayout
+            android:id="@+id/cuisineTable"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:isScrollContainer="true">
+        </TableLayout>
+    </ScrollView>
+
+
     <TextView
         android:id="@+id/allergiesText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/cuisineText"
-        android:layout_marginTop="80dp"
+        android:layout_below="@id/cuisineScroller"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:text="Allergies"
         android:textSize="16sp"
@@ -83,19 +104,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/allergiesText"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="50dp"
         android:gravity="center"
         android:text="Diet"
         android:textSize="16sp"
         android:textStyle="bold" />
 
-    <RadioGroup
-        android:id="@+id/radioButtonGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/dietText">
-    </RadioGroup>
-
+    <NumberPicker
+        android:id="@+id/dietPicker"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:layout_below="@id/dietText"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="10dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/finalStepBtn"

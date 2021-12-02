@@ -10,10 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.NumberPicker;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +28,8 @@ public class FilterPageActivity extends AppCompatActivity implements Serializabl
 
     RelativeLayout pageLayout;
     ArrayList<CheckBox> cuisines;
-    ArrayList<RadioButton> diets;
+    NumberPicker dietPicker;
+    String[] diets;
     ProgressBar spinner;
 
     @Override
@@ -89,12 +93,11 @@ public class FilterPageActivity extends AppCompatActivity implements Serializabl
     }
 
     public void setupDiets(){
-        String[] diets = {
-                "Gluten Free", "Ketogenic", "Vegetarian", "Lacto-Vegetarian",
+        diets = new String[]{
+                "None", "Gluten Free", "Ketogenic", "Vegetarian", "Lacto-Vegetarian",
                 "Ovo-Vegetarian", "Vegan", "Pescetarian", "Paleo",
                 "Primal", "Low FODMAP", "Whole30"
         };
-        this.diets = new ArrayList<>();
         createDietsRadioButtons(diets, "DietRadioButton", R.id.dietText, 56000);
     }
 
@@ -108,14 +111,32 @@ public class FilterPageActivity extends AppCompatActivity implements Serializabl
                 "Nordic", "Southern", "Spanish", "Thai", "Vietnamese"
         };
         this.cuisines = new ArrayList<>();
-        createCheckboxArray(cuisines, "CuisineCheckbox", R.id.cuisineText, 57000);
+        createCheckboxTable(cuisines, "CuisineCheckbox", R.id.cuisineText, 57000);
     }
 
-    public void createCheckboxArray(String[] array, String tagName, int placeBelowID, int idStart){
-        for (int i=0; i<array.length; i++) {
-            CheckBox temp =  new CheckBox(this);
-            temp.setTag(array[i]+tagName);
-            temp.setId(idStart+i);
+    public void createCheckboxTable(String[] array, String tagName, int placeBelowID, int idStart){
+        TableLayout table = (TableLayout) findViewById(R.id.cuisineTable);
+        int remainder = array.length%3;
+        for (int i=0; i<array.length/3+1; i++) {
+            if (i<array.length/3 || (i==array.length/3 && remainder>=1)){
+                TableRow row = new TableRow(this);
+                for (int j=0; j<=2; j++){
+                    if (j==1 && remainder==1 && i==array.length/3) break;
+                    if (j==2 && remainder==2 && i==array.length/3) break;
+                    CheckBox temp =  new CheckBox(this);
+                    temp.setTag(array[(i*3)+j]+tagName);
+                    temp.setId(idStart+(i*3)+j);
+                    temp.setText(array[(i*3)+j]);
+                    row.addView(temp);
+                    cuisines.add(temp);
+
+                }
+                table.addView(row);
+
+            }
+
+
+            /*
             temp.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT));
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
@@ -127,48 +148,24 @@ public class FilterPageActivity extends AppCompatActivity implements Serializabl
                 else params.addRule(RelativeLayout.BELOW, placeBelowID);
             }
             else params.addRule(RelativeLayout.BELOW, placeBelowID);
-
-            temp.setText(array[i]);
             temp.setLayoutParams(params);
+             */
 
-            cuisines.add(temp);
 
-            pageLayout.addView(temp, params);
         }
     }
 
     public void createDietsRadioButtons(String[] array, String tagName, int placeBelowID, int idStart){
-        RadioGroup group = (RadioGroup) findViewById(R.id.radioButtonGroup);
-        for (int i=0; i<array.length; i++) {
-            RadioButton temp =  new RadioButton(this);
-            temp.setTag(array[i]+tagName);
-            temp.setId(idStart+i);
-            temp.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT));
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                    RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        dietPicker = (NumberPicker) findViewById(R.id.dietPicker);
+        dietPicker.setWrapSelectorWheel(false);
+        dietPicker.setMinValue(0);
+        dietPicker.setMaxValue(array.length-1);
+        dietPicker.setDisplayedValues(array);
 
-            if (i>0) {
-                if((i%3)>0) params.addRule(RelativeLayout.RIGHT_OF, idStart+i-1);
-                if ((i/3)!=0) params.addRule(RelativeLayout.BELOW, idStart+i-3);
-                else params.addRule(RelativeLayout.BELOW, placeBelowID);
-            }
-            else params.addRule(RelativeLayout.BELOW, placeBelowID);
-
-            temp.setText(array[i]);
-            temp.setLayoutParams(params);
-
-            diets.add(temp);
-
-            group.addView(temp, params);
-        }
     }
 
     public String getFilters(){
-        String dietFilter = "";
-        for (RadioButton diet : diets) {
-            if (diet.isChecked()) dietFilter += diet.getText();
-        }
+        String dietFilter = diets[dietPicker.getValue()];
         String cuisineFilter = "";
         for (CheckBox cuisine : cuisines) {
             if (cuisine.isChecked()) {
@@ -178,9 +175,10 @@ public class FilterPageActivity extends AppCompatActivity implements Serializabl
 
         }
 
-        if (dietFilter!="" && cuisineFilter!=""){
+        // "None" is necessary so we don't get a 0 in the display
+        if (dietFilter!="None" && cuisineFilter!=""){
             return "&diet="+dietFilter+"&"+"cuisine="+cuisineFilter;
-        } else if (dietFilter!=""){
+        } else if (dietFilter!="None"){
             return "&diet="+dietFilter;
         } else if (cuisineFilter!=""){
             return "&cuisine="+cuisineFilter;
