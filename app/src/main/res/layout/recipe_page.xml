@@ -44,7 +44,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:gravity="center"
-            android:textSize="30dp" />
+            android:textSize="30dp"
+            android:textStyle="bold"/>
 
         <ImageView
             android:id="@+id/recipeImage"
@@ -61,7 +62,8 @@
             android:layout_margin="10dp"
             android:gravity="center"
             android:text="Ingredients:"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:textStyle="bold"//>
 
         <TextView
             android:id="@+id/ingredientListView"
@@ -79,7 +81,8 @@
             android:layout_margin="10dp"
             android:gravity="center"
             android:text="Steps:"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/stepsListView"
@@ -88,6 +91,80 @@
             android:layout_below="@id/stepsText"
             android:layout_margin="10dp"
             android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/additionalText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/stepsListView"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:text="Additional Info:"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/servingsText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:text="Servings:"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/servings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/pricingText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:text="Price per Serving:"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/pricing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/timeReadyText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:text="Ready in:"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/timeReady"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center"/>
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

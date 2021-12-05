@@ -64,6 +64,15 @@ public class RecipePageActivity extends AppCompatActivity {
             stepsListView.setText(stepsListView.getText()+"•"+recipe.getSteps().get(p)+"\n\n");
         }
 
+        //Display Additional Info
+        TextView servings= findViewById(R.id.servings);
+        TextView pricing= findViewById(R.id.pricing);
+        TextView timeReady= findViewById(R.id.timeReady);
+
+        servings.setText(Integer.toString(recipe.getServings()));
+        pricing.setText(recipe.getPricePerServing().toString());
+        timeReady.setText(recipe.getReadyInMinutes()+" minutes");
+
 
     }
 
