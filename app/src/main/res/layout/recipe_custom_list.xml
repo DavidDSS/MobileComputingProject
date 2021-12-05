@@ -19,8 +19,8 @@
         android:onClick="goToRecipe">
         <ImageView
             android:id="@+id/recipeImageView"
-            android:layout_width="84dp"
-            android:layout_height="84dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:padding="16dp"
             android:layout_gravity="left"/>
         <TextView
@@ -29,7 +29,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_gravity="center"
-            android:textColor="@android:color/black"/>
+            android:textColor="@android:color/black"
+            android:textSize="20dp"/>
         <TextView
             android:id="@+id/recipeId"
             android:layout_width="wrap_content"

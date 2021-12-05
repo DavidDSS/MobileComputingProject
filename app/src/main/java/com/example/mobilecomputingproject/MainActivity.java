@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     ListView ingredientListView;
     ArrayList<IngredientsView> ingredientList;
     IngredientsViewAdapter ingredientListAdapter;
+    EditText userInputText;
+    Button nextPageBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +56,11 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
         //Initialize Screen Elements
         //Initialize Buttons
-        Button nextPageBtn = findViewById(R.id.nextStepBtn);
+        nextPageBtn = findViewById(R.id.nextStepBtn);
         Button addIngredientBtn = findViewById(R.id.addBtn);
 
         //Initialize User Input Field
-        EditText userInputText= findViewById(R.id.ingredientEditText);
+        userInputText= findViewById(R.id.ingredientEditText);
 
         //Initialize Ingredient ListView and Ingredient List
         ingredientListView= findViewById(R.id.ingredientList);
@@ -79,17 +82,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
             public void onClick(View view) {
                 if(!userInputText.getText().toString().equals("")) {
                     //Add Ingredient to list and display it
-                    String userIngredient= userInputText.getText().toString();
-                    IngredientsView ingredientsView= new IngredientsView(userIngredient);
-                    ingredientList.add(ingredientsView);
-                    ingredientListAdapter.notifyDataSetChanged();
-
-                    //Clear User Input
-                    userInputText.setText("");
-
-                    //Change style of "next" btn and enable it
-                    nextPageBtn.setEnabled(true);
-                    nextPageBtn.setBackgroundColor(getResources().getColor(R.color.nutri_green));
+                    addIngredientToList();
                 }
             }
         });
@@ -107,6 +100,16 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                 goToFilters(view, urlIngredientString);
             }
         });
+
+        userInputText.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View view, int keyCode, KeyEvent keyevent) {
+                if ((keyevent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    addIngredientToList();
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     //Go to Filters Page
@@ -121,5 +124,26 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         int position = ingredientListView.getPositionForView(view);
         ingredientList.remove(position);
         ingredientListAdapter.notifyDataSetChanged();
+
+        if(ingredientList.size()==0){
+            //Change style of "next" btn and disable it
+            nextPageBtn.setEnabled(false);
+            nextPageBtn.setBackgroundColor(getResources().getColor(R.color.btn_disabled));
+        }
+    }
+
+    public void addIngredientToList(){
+        //Add Ingredient to list and display it
+        String userIngredient= userInputText.getText().toString();
+        IngredientsView ingredientsView= new IngredientsView(userIngredient);
+        ingredientList.add(ingredientsView);
+        ingredientListAdapter.notifyDataSetChanged();
+
+        //Clear User Input
+        userInputText.setText("");
+
+        //Change style of "next" btn and enable it
+        nextPageBtn.setEnabled(true);
+        nextPageBtn.setBackgroundColor(getResources().getColor(R.color.nutri_green));
     }
 }
