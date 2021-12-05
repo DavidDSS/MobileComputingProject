@@ -2,6 +2,6 @@
     <string name="app_name">Nutri+</string>
     <string name="addIngredientsTitle">Add Ingredients</string>
     <string name="listTitle"><u>List of Ingredients</u></string>
-    <string name="emptyList">List is Empty!</string>
+    <string name="emptyList">List is Empty! Try adding some ingredients</string>
     <string name="emptySearch">No Recipes Found! Try expanding your search</string>
 </resources>

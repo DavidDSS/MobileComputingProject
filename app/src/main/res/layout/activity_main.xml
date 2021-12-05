@@ -81,13 +81,15 @@
         android:gravity="center"
         android:textSize="25dp"
         android:layout_marginBottom="20dp"/>
+
     <TextView
         android:id="@+id/emptyListText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/emptyList"
         android:layout_below="@id/ingredientListTitle"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:text="@string/emptyList"
+        android:layout_margin="40dp"/>
 
     <ListView
         android:id="@+id/ingredientList"
