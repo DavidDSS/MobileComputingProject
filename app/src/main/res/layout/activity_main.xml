@@ -32,10 +32,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/nutri_toolbar"
-        android:text="@string/addIngredientsTitle"
+        android:layout_marginBottom="20dp"
         android:gravity="center"
+        android:text="@string/addIngredientsTitle"
         android:textSize="25dp"
-        android:layout_marginBottom="20dp"/>
+        android:textStyle="bold"/>
 
     <LinearLayout
         android:id="@+id/ingredientField"
