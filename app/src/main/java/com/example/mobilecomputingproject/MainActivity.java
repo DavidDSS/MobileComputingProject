@@ -102,8 +102,8 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         });
 
         userInputText.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View view, int keyCode, KeyEvent keyevent) {
-                if ((keyevent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+            public boolean onKey(View v, int code, KeyEvent e) {
+                if ((e.getAction() == KeyEvent.ACTION_DOWN) && (code == KeyEvent.KEYCODE_ENTER)) {
                     addIngredientToList();
                     return true;
                 }
