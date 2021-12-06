@@ -1,3 +1,13 @@
+/*
+Griffin Allen, Justin Gula, David Saldana
+COSC 3P97 Final Project
+Nutri+ (Recipe Finder App)
+References:
+- Awaiken. “Food API and Recipe API.” Spoonacular Recipe and Food API, https://spoonacular.com/food-api.
+- “Volley Overview  :   Android Developers.” Android Developers, https://developer.android.com/training/volley.
+- “Callback  :   Android Developers.” Android Developers, https://developer.android.com/reference/javax/security/auth/callback/Callback.
+*/
+
 package com.example.mobilecomputingproject;
 
 import androidx.appcompat.app.AppCompatActivity;
