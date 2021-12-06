@@ -58,29 +58,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-    <TextView
-        android:id="@+id/priceRangeText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/filterText"
-        android:layout_marginTop="30dp"
-        android:gravity="center"
-        android:text="Price Range"
-        android:textSize="16sp"
-        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/cuisineText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/priceRangeText"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:gravity="center"
         android:text="Cuisine"
         android:textSize="16sp"
         android:textStyle="bold" />
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:id="@+id/cuisineScroller"
             android:layout_width="fill_parent"
             android:layout_height="150dp"
@@ -97,25 +86,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:isScrollContainer="true"></TableLayout>
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
-
-    <TextView
-        android:id="@+id/allergiesText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/cuisineScroller"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:text="Allergies"
-        android:textSize="16sp"
-        android:textStyle="bold" />
     <TextView
         android:id="@+id/dietText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/allergiesText"
-        android:layout_marginTop="50dp"
+        android:layout_below="@id/cuisineScroller"
+        android:layout_marginTop="30dp"
         android:gravity="center"
         android:text="Diet"
         android:textSize="16sp"
