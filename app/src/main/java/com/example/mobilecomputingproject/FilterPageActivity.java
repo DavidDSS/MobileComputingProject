@@ -109,9 +109,9 @@ public class FilterPageActivity extends AppCompatActivity implements Serializabl
     public void setupCusisines(){
         String[] cuisines = {
                 "African", "American", "British", "Cajun", "Caribbean",
-                "Chinese", "Eastern European", "European", "French", "German", "Greek",
+                "Chinese", "Eastern\nEuropean", "European", "French", "German", "Greek",
                 "Indian", "Irish", "Italian", "Japanese", "Jewish", "Korean",
-                "Latin American", "Mediterranean", "Mexican", "Middle Eastern",
+                "Latin\nAmerican", "Mediterranean", "Mexican", "Middle\nEastern",
                 "Nordic", "Southern", "Spanish", "Thai", "Vietnamese"
         };
         this.cuisines = new ArrayList<>();
@@ -137,6 +137,7 @@ public class FilterPageActivity extends AppCompatActivity implements Serializabl
                     temp.setTag(array[(i*numCol)+j]+tagName);
                     temp.setId(idStart+(i*numCol)+j);
                     temp.setText(array[(i*numCol)+j]);
+                    temp.setHeight(88);
                     row.addView(temp);
                     cuisines.add(temp);
 
