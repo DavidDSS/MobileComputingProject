@@ -137,7 +137,7 @@ public class FilterPageActivity extends AppCompatActivity implements Serializabl
                     temp.setTag(array[(i*numCol)+j]+tagName);
                     temp.setId(idStart+(i*numCol)+j);
                     temp.setText(array[(i*numCol)+j]);
-                    temp.setHeight(90);
+                    temp.setHeight(125);
                     row.addView(temp);
                     cuisines.add(temp);
 
