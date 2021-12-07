@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FilterPageActivity"
+    android:orientation="horizontal"
+    android:id="@+id/filterRelativeLayout">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/nutri_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/nutri_green"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/app_name"
+            android:textColor="@color/white"
+            android:textSize="35dp" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/filterText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nutri_toolbar"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="Filters"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <ProgressBar
+        android:layout_below="@id/filterText"
+        android:id="@+id/loadingSpinner"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/filterText"
+        android:layout_above="@id/finalStepBtn">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight=".5"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/cuisineText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:text="Cuisine"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/cuisineScroller"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/cuisineText"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/stroke_background"
+            android:scrollbars="vertical">
+
+            <TableLayout
+                android:id="@+id/cuisineTable"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:isScrollContainer="true"
+                android:gravity="center"></TableLayout>
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight=".5"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+    <TextView
+        android:id="@+id/dietText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cuisineScroller"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:text="Diet"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <NumberPicker
+        android:id="@+id/dietPicker"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/dietText"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="10dp" />
+        </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/finalStepBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="6dp"
+        android:backgroundTint="@color/nutri_green"
+        android:padding="10dp"
+        android:text="Get Recipes"
+        android:textColor="@color/white"
+        android:theme="@style/Theme.MaterialComponents"
+        app:cornerRadius="12dp" />
+</RelativeLayout>

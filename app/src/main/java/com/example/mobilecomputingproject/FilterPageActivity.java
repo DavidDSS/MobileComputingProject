@@ -134,24 +134,6 @@ public class FilterPageActivity extends AppCompatActivity implements Serializabl
                 table.addView(row);
 
             }
-
-
-            /*
-            temp.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT));
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                    RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-
-            if (i>0) {
-                if((i%3)>0) params.addRule(RelativeLayout.RIGHT_OF, idStart+i-1);
-                if ((i/3)!=0) params.addRule(RelativeLayout.BELOW, idStart+i-3);
-                else params.addRule(RelativeLayout.BELOW, placeBelowID);
-            }
-            else params.addRule(RelativeLayout.BELOW, placeBelowID);
-            temp.setLayoutParams(params);
-             */
-
-
         }
     }
 
