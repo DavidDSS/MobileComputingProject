@@ -4,10 +4,14 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.NumberPicker;
@@ -115,18 +119,24 @@ public class FilterPageActivity extends AppCompatActivity implements Serializabl
     }
 
     public void createCheckboxTable(String[] array, String tagName, int placeBelowID, int idStart){
+        WindowManager window = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
+        int rotation = window.getDefaultDisplay().getRotation();
+        int numCol = 0;
+        if ((rotation==Surface.ROTATION_0)||(rotation==Surface.ROTATION_180)) numCol=3;
+        else if ((rotation==Surface.ROTATION_90)||(rotation==Surface.ROTATION_270)) numCol=2;
+
         TableLayout table = (TableLayout) findViewById(R.id.cuisineTable);
-        int remainder = array.length%3;
-        for (int i=0; i<array.length/3+1; i++) {
-            if (i<array.length/3 || (i==array.length/3 && remainder>=1)){
+        int remainder = array.length%numCol;
+        for (int i=0; i<array.length/numCol+1; i++) {
+            if (i<array.length/numCol || (i==array.length/numCol && remainder>=1)){
                 TableRow row = new TableRow(this);
-                for (int j=0; j<=2; j++){
-                    if (j==1 && remainder==1 && i==array.length/3) break;
-                    if (j==2 && remainder==2 && i==array.length/3) break;
+                for (int j=0; j<=numCol-1; j++){
+                    if (j==numCol-2 && remainder==numCol-2 && i==array.length/numCol) break;
+                    if (j==numCol-1 && remainder==numCol-1 && i==array.length/numCol) break;
                     CheckBox temp =  new CheckBox(this);
-                    temp.setTag(array[(i*3)+j]+tagName);
-                    temp.setId(idStart+(i*3)+j);
-                    temp.setText(array[(i*3)+j]);
+                    temp.setTag(array[(i*numCol)+j]+tagName);
+                    temp.setId(idStart+(i*numCol)+j);
+                    temp.setText(array[(i*numCol)+j]);
                     row.addView(temp);
                     cuisines.add(temp);
 
