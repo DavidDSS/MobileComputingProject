@@ -16,6 +16,7 @@ import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class RecipePageActivity extends AppCompatActivity {
@@ -68,9 +69,11 @@ public class RecipePageActivity extends AppCompatActivity {
         TextView servings= findViewById(R.id.servings);
         TextView pricing= findViewById(R.id.pricing);
         TextView timeReady= findViewById(R.id.timeReady);
-
+        DecimalFormat df = new DecimalFormat("0.00");
+        Double price= recipe.getPricePerServing()/100.00;
+        price=Math.round(price*100.0)/100.0;
         servings.setText(Integer.toString(recipe.getServings()));
-        pricing.setText(recipe.getPricePerServing().toString());
+        pricing.setText("$"+price.toString()+" dollars");
         timeReady.setText(recipe.getReadyInMinutes()+" minutes");
 
 
